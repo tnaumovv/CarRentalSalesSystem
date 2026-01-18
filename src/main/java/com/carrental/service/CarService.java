@@ -30,7 +30,7 @@ public class CarService extends BaseService<Car> {
     public Car getById(int id) throws SQLException {
         Car car = repository.getById(id);
         if (car == null) {
-            throw new IllegalArgumentException("Car with ID " + id + " not found");
+            throw new IllegalArgumentException("Car with ID " + id + " not found ");
         }
         return car;
     }

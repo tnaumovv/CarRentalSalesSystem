@@ -19,7 +19,7 @@ public abstract class BaseService<T> {
 
     protected void validatePrice(double price) {
         if (price <= 0) {
-            throw new IllegalArgumentException("Price must be positive");
+            throw new IllegalArgumentException("Price must be positive" );
         }
     }
 }

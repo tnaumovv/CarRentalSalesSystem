@@ -25,7 +25,7 @@ public class Car extends Vehicle{
 
     @Override
     public String getInfo() {
-        return String.format("ID: %d | %s | %s | %s",
+        return String.format("ID: %d | %s | %s | %s ",
                 getId(), getVehicleType(), super.getInfo(), description);
     }
 

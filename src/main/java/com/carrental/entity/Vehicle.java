@@ -39,7 +39,7 @@ public abstract class Vehicle {
     public abstract String getVehicleType();
 
     public String getInfo() {
-        return String.format("%s %s (%d) | Location: %s | Price: $%.2f",
+        return String.format("%s %s (%d) | Location: %s | Price: $%.2f ",
                 brand, model, year, location, price);
     }
 }

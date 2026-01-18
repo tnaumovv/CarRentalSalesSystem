@@ -37,7 +37,7 @@ public class Main {
                             controller.deleteCar(scanner);
                             break;
                         case 4:
-                            System.out.println("\nThank you for using our system!");
+                            System.out.println("\nThank you for using our system !");
                             running = false;
                             break;
                         default:
