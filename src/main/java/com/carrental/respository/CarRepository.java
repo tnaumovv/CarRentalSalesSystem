@@ -8,10 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// ПОЛИМОРФИЗМ - CarRepository реализует интерфейс Repository
 public class CarRepository implements Repository<Car> {
 
-    // ПОЛИМОРФИЗМ - реализация метода из интерфейса
     @Override
     public void add(Car car) throws SQLException {
         String sql = "INSERT INTO cars (brand, model, year, description, location, price) VALUES (?, ?, ?, ?, ?, ?)";
