@@ -41,10 +41,10 @@ public class Main {
                             running = false;
                             break;
                         default:
-                            System.out.println("\n❌ Invalid choice. Try again.");
+                            System.out.println("\n Invalid choice. Try again.");
                     }
                 } catch (Exception e) {
-                    System.out.println("\n❌ Input error: " + e.getMessage());
+                    System.out.println("\n Input error: " + e.getMessage());
                     scanner.nextLine();
                 }
 
@@ -55,7 +55,7 @@ public class Main {
             }
 
         } catch (Exception e) {
-            System.out.println("❌ Database connection error: " + e.getMessage());
+            System.out.println(" Database connection error: " + e.getMessage());
         }
 
         scanner.close();
