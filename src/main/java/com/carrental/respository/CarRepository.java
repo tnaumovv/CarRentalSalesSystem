@@ -28,6 +28,24 @@ public class CarRepository implements Repository<Car> {
         }
     }
 
+    public void update(Car car) throws SQLException {
+        String sql = "UPDATE cars SET brand = ?, model = ?, year = ?, description = ?, location = ?, price = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, car.getBrand());
+            stmt.setString(2, car.getModel());
+            stmt.setInt(3, car.getYear());
+            stmt.setString(4, car.getDescription());
+            stmt.setString(5, car.getLocation());
+            stmt.setDouble(6, car.getPrice());
+            stmt.setInt(7, car.getId());
+
+            stmt.executeUpdate();
+        }
+    }
+
     @Override
     public List<Car> getAll() throws SQLException {
         List<Car> cars = new ArrayList<>();
@@ -91,5 +109,3 @@ public class CarRepository implements Repository<Car> {
         }
     }
 }
-
-

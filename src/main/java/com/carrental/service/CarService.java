@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CarService extends BaseService<Car> {
-    private Repository<Car> repository;
+    private CarRepository repository;
 
     public CarService() {
         this.repository = new CarRepository();
@@ -33,6 +33,13 @@ public class CarService extends BaseService<Car> {
             throw new IllegalArgumentException("Car with ID " + id + " not found ");
         }
         return car;
+    }
+
+    public void update(Car car) throws SQLException {
+        getById(car.getId());
+        validateYear(car.getYear());
+        validatePrice(car.getPrice());
+        repository.update(car);
     }
 
     @Override

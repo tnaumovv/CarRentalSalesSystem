@@ -37,6 +37,9 @@ public class Main {
                             controller.deleteCar(scanner);
                             break;
                         case 4:
+                            controller.updateCar(scanner);
+                            break;
+                        case 5:
                             System.out.println("\nThank you for using our system !");
                             running = false;
                             break;
@@ -68,8 +71,9 @@ public class Main {
         System.out.println("│  1. Add New Car                     │");
         System.out.println("│  2. View All Cars                   │");
         System.out.println("│  3. Delete Car                      │");
+        System.out.println("│  4. Update Car                      │");
         System.out.println("├─────────────────────────────────────┤");
-        System.out.println("│  4. Exit                            │");
+        System.out.println("│  5. Exit                            │");
         System.out.println("└─────────────────────────────────────┘");
     }
 }

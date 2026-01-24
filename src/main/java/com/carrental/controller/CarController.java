@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CarController {
-    private BaseService<Car> service;
+    private CarService service;
 
     public CarController() {
         this.service = new CarService();
@@ -71,6 +71,55 @@ public class CarController {
         }
     }
 
+    public void updateCar(Scanner scanner) {
+        try {
+            System.out.println("\n=== UPDATE CAR ===");
+
+            System.out.print("Enter car ID to update: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            Car car = service.getById(id);
+            System.out.println("\nCurrent info: " + car);
+
+            System.out.print("\nNew brand (press Enter to keep '" + car.getBrand() + "'): ");
+            String brand = scanner.nextLine();
+            if (!brand.isEmpty()) car.setBrand(brand);
+
+            System.out.print("New model (press Enter to keep '" + car.getModel() + "'): ");
+            String model = scanner.nextLine();
+            if (!model.isEmpty()) car.setModel(model);
+
+            System.out.print("New year (press Enter to keep '" + car.getYear() + "'): ");
+            String yearStr = scanner.nextLine();
+            if (!yearStr.isEmpty()) {
+                car.setYear(Integer.parseInt(yearStr));
+            }
+
+            System.out.print("New description (press Enter to keep): ");
+            String description = scanner.nextLine();
+            if (!description.isEmpty()) car.setDescription(description);
+
+            System.out.print("New location (press Enter to keep '" + car.getLocation() + "'): ");
+            String location = scanner.nextLine();
+            if (!location.isEmpty()) car.setLocation(location);
+
+            System.out.print("New price (press Enter to keep $" + car.getPrice() + "): ");
+            String priceStr = scanner.nextLine();
+            if (!priceStr.isEmpty()) {
+                car.setPrice(Double.parseDouble(priceStr));
+            }
+
+            service.update(car);
+            System.out.println("\n✓ Car updated successfully!");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n❌ " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("\n❌ Error updating car: " + e.getMessage());
+        }
+    }
+
     public void deleteCar(Scanner scanner) {
         try {
             System.out.println("\n=== DELETE CAR ===");
@@ -99,4 +148,3 @@ public class CarController {
         }
     }
 }
-
