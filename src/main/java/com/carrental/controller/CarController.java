@@ -114,9 +114,9 @@ public class CarController {
             System.out.println("\n✓ Car updated successfully!");
 
         } catch (IllegalArgumentException e) {
-            System.out.println("\n❌ " + e.getMessage());
+            System.out.println("\n " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("\n❌ Error updating car: " + e.getMessage());
+            System.out.println("\n Error updating car: " + e.getMessage());
         }
     }
 

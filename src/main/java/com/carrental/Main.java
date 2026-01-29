@@ -12,7 +12,7 @@ public class Main {
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             System.out.println("╔═══════════════════════════════════════╗");
-            System.out.println("║   CAR RENTAL AND SALES SYSTEM         ║");
+            System.out.println("║      CAR RENTAL AND SALES SYSTEM      ║");
             System.out.println("╚═══════════════════════════════════════╝");
 
             CarController controller = new CarController();

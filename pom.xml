@@ -11,13 +11,11 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- Зависимость для PostgreSQL JDBC драйвера -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.4</version>
         </dependency>
-        <!-- Зависимость для JUnit для тестирования -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -28,7 +26,6 @@
 
     <build>
         <plugins>
-            <!-- Плагин для компиляции проекта -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

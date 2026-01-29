@@ -5,23 +5,18 @@ public class Car extends Vehicle{
 
     public Car() {}
 
-
     public Car(String brand, String model, int year, String description, String location, double price) {
         super(brand, model, year, location, price);
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description;}
     public void setDescription(String description) {
         this.description = description;
     }
 
     @Override
-    public String getVehicleType() {
-        return "Car";
-    }
+    public String getVehicleType() { return "Car";}
 
     @Override
     public String getInfo() {

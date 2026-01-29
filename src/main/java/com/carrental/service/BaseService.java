@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public abstract class BaseService<T> {
-    public abstract void add(T entity) throws SQLException;
-    public abstract List<T> getAll() throws SQLException;
-    public abstract T getById(int id) throws SQLException;
-    public abstract void delete(int id) throws SQLException;
+    public abstract void add(T entity);
+    public abstract List<T> getAll();
+    public abstract T getById(int id);
+    public abstract void delete(int id);
 
     protected void validateYear(int year) {
         int currentYear = LocalDate.now().getYear();
