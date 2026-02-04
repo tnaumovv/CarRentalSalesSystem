@@ -1,6 +1,7 @@
-package com.carrental.repository;
+package com.carrental.respository;
 
 import com.carrental.entity.Car;
+import com.carrental.entity.CarCategory;
 import com.carrental.config.DatabaseConnection;
 import com.carrental.respository.Repository;
 
@@ -12,7 +13,7 @@ public class CarRepository implements Repository<Car> {
 
     @Override
     public void add(Car car) {
-        String sql = "INSERT INTO cars (brand, model, year, description, location, price) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cars (brand, model, year, description, location, price, category) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -23,34 +24,34 @@ public class CarRepository implements Repository<Car> {
             stmt.setString(4, car.getDescription());
             stmt.setString(5, car.getLocation());
             stmt.setDouble(6, car.getPrice());
+            stmt.setString(7, car.getCategory() != null ? car.getCategory().name() : null);  // ДОБАВЛЕНО
 
             stmt.executeUpdate();
-
             stmt.close();
             conn.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error adding car: " + e.getMessage());
         }
     }
 
     public void update(Car car) {
-        String sql = "UPDATE cars SET brand = ?, model = ?, year = ?, description = ?, location = ?, price = ? WHERE id = ?";
+        String sql = "UPDATE cars SET brand = ?, model = ?, year = ?, description = ?, location = ?, price = ?, category = ? WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-             stmt.setString(1, car.getBrand());
-             stmt.setString(2, car.getModel());
-             stmt.setInt(3, car.getYear());
-             stmt.setString(4, car.getDescription());
-             stmt.setString(5, car.getLocation());
-             stmt.setDouble(6, car.getPrice());
-             stmt.setInt(7, car.getId());
-             stmt.executeUpdate();
+            stmt.setString(1, car.getBrand());
+            stmt.setString(2, car.getModel());
+            stmt.setInt(3, car.getYear());
+            stmt.setString(4, car.getDescription());
+            stmt.setString(5, car.getLocation());
+            stmt.setDouble(6, car.getPrice());
+            stmt.setString(7, car.getCategory() != null ? car.getCategory().name() : null);  // ДОБАВЛЕНО
+            stmt.setInt(8, car.getId());
 
-             stmt.close();
-             conn.close();
+            stmt.executeUpdate();
+            stmt.close();
+            conn.close();
         } catch (SQLException e) {
             System.out.println("Error updating car: " + e.getMessage());
         }
@@ -75,6 +76,15 @@ public class CarRepository implements Repository<Car> {
                 car.setDescription(rs.getString("description"));
                 car.setLocation(rs.getString("location"));
                 car.setPrice(rs.getDouble("price"));
+
+                String categoryStr = rs.getString("category");
+                if (categoryStr != null && !categoryStr.isEmpty()) {
+                    try {
+                        car.setCategory(CarCategory.valueOf(categoryStr));
+                    } catch (IllegalArgumentException e) {
+                    }
+                }
+
                 cars.add(car);
             }
 
@@ -109,6 +119,14 @@ public class CarRepository implements Repository<Car> {
                 car.setDescription(rs.getString("description"));
                 car.setLocation(rs.getString("location"));
                 car.setPrice(rs.getDouble("price"));
+
+                String categoryStr = rs.getString("category");
+                if (categoryStr != null && !categoryStr.isEmpty()) {
+                    try {
+                        car.setCategory(CarCategory.valueOf(categoryStr));
+                    } catch (IllegalArgumentException e) {
+                    }
+                }
             }
 
             rs.close();
@@ -131,13 +149,11 @@ public class CarRepository implements Repository<Car> {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
-
             stmt.close();
             conn.close();
 
         } catch (SQLException e) {
             System.out.println("Error deleting car: " + e.getMessage());
-
         }
     }
 }
